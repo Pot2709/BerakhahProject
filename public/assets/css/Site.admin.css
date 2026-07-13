@@ -1,0 +1,383 @@
+﻿/* 🌐 GENERAL */
+body {
+    scroll-behavior: smooth;
+    background-color: #fdfdfd;
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.small-text {
+    font-size: 0.9rem;
+}
+
+/* 📦 CONTENEDOR DASHBOARD */
+.dashboard-container {
+    background-color: #fdfdfd;
+    padding: 2rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+    min-height: calc(100vh - 120px);
+}
+
+/* 🔹 TARJETAS ESTILO APPLE */
+.stat-card {
+    background: #ffffff;
+    border: 1px solid rgba(200, 200, 200, 0.15);
+    border-radius: 1.2rem;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+.stat-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* 🔹 TARJETA PARA GRÁFICOS */
+.chart-card {
+    border-radius: 1.2rem;
+    padding: 1.5rem;
+    background: #ffffff;
+    border: 1px solid rgba(220, 220, 220, 0.2);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+}
+
+/* 🔹 TEXTOS */
+h2, h3, h6 {
+    font-weight: 600;
+}
+.text-muted {
+    color: #6c757d !important;
+}
+
+.badge {
+    font-weight: 500;
+    padding: 0.45rem 0.75rem;
+    border-radius: 0.8rem;
+}
+
+/* 📚 TABLAS */
+.table,
+table.dataTable {
+    font-size: 0.92rem;
+    border-collapse: separate !important;
+    border-spacing: 0;
+    border: none;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    width: 100% !important;
+}
+
+table.dataTable thead th {
+    background: #f5f6fa;
+    color: #000;
+    font-weight: 600;
+    text-transform: uppercase;
+    border: none;
+    padding: 10px 12px;
+    white-space: nowrap;
+}
+
+table.dataTable tbody tr:hover {
+    background-color: #f9fafc;
+}
+
+table.dataTable td {
+    border: none;
+    padding: 8px 12px;
+    color: #333;
+    word-wrap: break-word;
+}
+
+.dataTables_wrapper .dataTables_info {
+    color: #666;
+    font-size: 0.85rem;
+    padding-top: 8px;
+    padding-left: 0.5rem;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+    padding-right: 0.5rem;
+}
+
+/* ============================================
+    SIDEBAR - ESCRITORIO (DEFAULT)
+   ============================================ */
+.sidebar-responsive,
+.sidebar-responsive a,
+.sidebar-responsive button,
+.sidebar-responsive h6,
+.sidebar-responsive i,
+.dropdown-item-custom {
+    color: #ffffff !important;
+}
+
+
+.dropdown-item-custom {
+    color: #ffffff;
+    transition: all 0.2s ease;
+}
+
+/* Hover limpio */
+.dropdown-item-custom:hover {
+    background-color: #ffffff;
+    color: #003463 !important;
+    border-radius: 8px;
+}
+
+/* Íconos también cambian */
+.dropdown-item-custom:hover i {
+    color: #003463 !important;
+}
+
+.sidebar-responsive {
+    width: 260px;
+    background-color: #003463;
+    position: fixed;
+    top: 56px;
+    bottom: 0;
+    left: 0; /* Visible por defecto en desktop */
+    padding: 1rem;
+    overflow-y: auto;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    box-shadow: 3px 0 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Botón de colapsar sidebar (solo desktop) */
+.collapse-btn {
+    position: absolute;
+    top: 10px;
+    right: -15px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    background: #fff;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform .3s ease;
+    z-index: 1200;
+    font-size: 13px;
+}
+
+/* Sidebar colapsado (solo iconos) */
+.sidebar-responsive.collapsed {
+    width: 70px !important;
+}
+
+/* Ocultar textos cuando está colapsado */
+.sidebar-responsive.collapsed span,
+.sidebar-responsive.collapsed h5 {
+    display: none !important;
+}
+
+/* Íconos centrados cuando está colapsado */
+.sidebar-responsive.collapsed .accordion-button i,
+.sidebar-responsive.collapsed .dropdown-item-custom i {
+    margin-right: 0 !important;
+    justify-content: center;
+}
+
+/* Rotación de flecha cuando colapsado */
+.sidebar-responsive.collapsed .collapse-btn i {
+    transform: rotate(180deg);
+}
+
+/* Contenido principal para desktop */
+.main-content {
+    margin-left: 260px;
+    transition: margin-left .3s ease;
+    padding: 1rem;
+    min-height: calc(100vh - 56px);
+}
+
+.sidebar-responsive.collapsed ~ .main-content {
+    margin-left: 70px !important;
+}
+
+/* Ítems menú */
+.dropdown-item-custom {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    color: #333;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+    margin-bottom: 2px;
+    cursor: pointer;
+}
+.dropdown-item-custom:hover {
+    background-color: #ebebeb;
+    color: #0d6efd;
+}
+
+/* Asegurar que los accordion-items sean transparentes */
+.accordion-item.border-0.bg-transparent {
+    background: transparent !important;
+    border: none !important;
+}
+
+/* ============================================
+   📱 MEDIA QUERIES PARA MÓVIL
+   ============================================ */
+
+/* Overlay para móviles (oculto por defecto) */
+.sidebar-overlay {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 998; /* Debajo del sidebar */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* ESTILOS PARA MÓVILES (< 992px) */
+@media (max-width: 991.98px) {
+    /* Sidebar oculto por defecto en móviles */
+    .sidebar-responsive {
+        left: -260px !important; /* Fuera de la pantalla */
+        z-index: 999; /* Sobre el overlay */
+    }
+
+    /* Sidebar visible cuando se activa */
+    .sidebar-responsive.show {
+        left: 0 !important;
+    }
+
+    /* Overlay visible */
+    .sidebar-overlay.show {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* Contenido principal ocupa toda la pantalla */
+    .main-content {
+        margin-left: 0 !important;
+        width: 100%;
+    }
+
+    /* Ocultar botón de colapsar en móviles */
+    .collapse-btn {
+        display: none !important;
+    }
+
+    /* Sidebar NO colapsable en móviles */
+    .sidebar-responsive.collapsed {
+        width: 260px !important;
+    }
+
+    /* Mostrar textos en móviles */
+    .sidebar-responsive.collapsed span,
+    .sidebar-responsive.collapsed h5 {
+        display: block !important;
+    }
+}
+
+/* AJUSTES ESPECÍFICOS PARA TABLETS (768px - 991px) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .sidebar-responsive {
+        width: 220px; /* Un poco más angosto */
+    }
+}
+
+/* AJUSTES ESPECÍFICOS PARA MÓVILES PEQUEÑOS (< 768px) */
+@media (max-width: 767.98px) {
+    .dashboard-container {
+        padding: 1rem;
+        border-radius: 1rem;
+    }
+
+    .stat-card, .chart-card {
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    /* Tablas responsivas */
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    table.dataTable {
+        font-size: 0.85rem;
+        min-width: 600px; /* Permite scroll horizontal */
+    }
+
+    /* Ajustes de texto */
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    h3 {
+        font-size: 1.25rem;
+    }
+
+    /* Formularios */
+    .form-control, .form-select {
+        font-size: 16px; /* Evita zoom en iOS */
+    }
+
+    .btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    /* Ajustes del navbar en móviles */
+    .navbar form input {
+        width: 100% !important;
+    }
+}
+
+/* AJUSTES PARA MÓVILES MUY PEQUEÑOS (< 576px) */
+@media (max-width: 575.98px) {
+    .dashboard-container {
+        padding: 0.75rem;
+    }
+
+    .stat-card, .chart-card {
+        padding: 0.75rem;
+    }
+
+    .sidebar-responsive {
+        width: 85%; /* Ocupa el 85% de la pantalla en móviles */
+        max-width: 300px;
+    }
+
+    .main-content {
+        padding: 0.5rem;
+    }
+}
+
+/* Modal de carga */
+#progress {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+#progress .center {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+/* css para perfil de cada uno con css */
+
