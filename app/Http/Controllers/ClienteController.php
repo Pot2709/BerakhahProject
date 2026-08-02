@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Cliente;
 use App\Mail\ClientMail;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Bus;
 
 class ClienteController extends Controller
 {
@@ -18,12 +19,13 @@ class ClienteController extends Controller
         return response()->json($clientes);
     }
 
-     public function guardarCliente(Request $request){
+    public function guardarCliente(Request $request){
+        //dd($request->all());
         try {
 
             $request->validate([
                 'nombre_cliente' => 'required',
-                'correo_cliente' => 'required|email',
+                'correo_cliente' => 'required',
                 'empresa_cliente' => 'required',
                 'estado_cliente' => 'required',
             ]);
@@ -43,12 +45,12 @@ class ClienteController extends Controller
                     'nombre_cliente' => $request->nombre_cliente,
                     'correo_cliente' => $request->correo_cliente,
                     'empresa_cliente' => $request->empresa_cliente,
-                    'estado' => $request->estado
+                    'estado_cliente' => $request->estado_cliente
                 ]);
 
             } else {
 
-                Usuario::create([
+                Cliente::create([
                     'nombre_cliente' => $request->nombre_cliente,
                     'correo_cliente' => $request->correo_cliente,
                     'empresa_cliente' => $request->empresa_cliente,
@@ -68,6 +70,9 @@ class ClienteController extends Controller
             ], 500);
         }
     }
+
+
+
 
      public function obtenerCliente($id){
         $cliente = Cliente::find($id);
@@ -97,20 +102,21 @@ class ClienteController extends Controller
             ]);
 
             // guardar lo necesario
-            Cliente::create([
-                'nombre_cliente'  => $request->nombre_cliente,
-                'correo_cliente'  => $request->correo_cliente,
-                'empresa_cliente' => $request->empresa_cliente,
-                'estado_cliente'  => false
-            ]);
+           Cliente::create([
+            'nombre_cliente'  => mb_strtoupper($request->nombre_cliente, 'UTF-8'),
+            'correo_cliente'  => strtolower($request->correo_cliente),
+            'empresa_cliente' => mb_strtoupper($request->empresa_cliente, 'UTF-8'),
+            'estado_cliente'  => false
+        ]);
 
             // envia el correo
-            Mail::to('pruebas@berakhah.pe')
-            ->send(new ClientMail([
-                'nombre_cliente'  => $request->nombre_cliente,
-                'correo_cliente'  => $request->correo_cliente,
-                'empresa_cliente' => $request->empresa_cliente,
-                'mensaje_cliente' => $request->mensaje_cliente,
+           Mail::to('pruebas@berakhah.pe')
+            ->queue(new ClientMail([
+                'nombre_cliente'  => mb_strtoupper($request->nombre_cliente, 'UTF-8'),
+
+                'correo_cliente'  => strtolower($request->correo_cliente),
+                'empresa_cliente' => mb_strtoupper($request->empresa_cliente, 'UTF-8'),
+                'mensaje_cliente' => mb_strtoupper($request->mensaje_cliente, 'UTF-8'),
             ]));
 
             return response()->json([

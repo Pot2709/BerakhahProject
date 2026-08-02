@@ -831,7 +831,7 @@ ANIMATIONS
 
     position: relative;
     padding:120px 0;
-    background-image:url("im4.jpg");
+   background-image: url("../images/im4.jpg");
     background-size:cover;
     background-position:center;
     background-repeat:no-repeat;

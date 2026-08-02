@@ -8,10 +8,7 @@
     <!-- Encabezado -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h2 class="fw-bold mb-1">Panel Contable</h2>
-            <p class="text-muted mb-0">
-                Resumen general de la gestión contable y tributaria
-            </p>
+            <h2 class="fw-bold mb-1">RESUMEN</h2>
         </div>
 
         <button class="btn btn-outline-dark rounded-pill px-4 shadow-sm">
@@ -25,32 +22,32 @@
         <div class="col-lg-3 col-sm-6">
             <div class="card stat-card">
                 <i class="fa-solid fa-building fa-2x mb-2 text-primary"></i>
-                <h6 class="fw-semibold mb-1">Clientes Activos</h6>
-                <h3 class="fw-bold mb-0">120</h3>
+                <h6 class="fw-semibold mb-1">Clientes Registrados</h6>
+                <h3 class="fw-bold mb-0">{{ $totalClientes }}</h3>
             </div>
         </div>
 
         <div class="col-lg-3 col-sm-6">
             <div class="card stat-card">
-                <i class="fa-solid fa-file-invoice fa-2x mb-2 text-success"></i>
-                <h6 class="fw-semibold mb-1">Comprobantes Emitidos</h6>
-                <h3 class="fw-bold mb-0">856</h3>
+                <i class="fa-solid fa-users fa-2x mb-2 text-success"></i>
+                <h6 class="fw-semibold mb-1">Usuarios</h6>
+                <h3 class="fw-bold mb-0">{{ $usuarios }}</h3>
+            </div>
+        </div>
+
+       <div class="col-lg-3 col-sm-6">
+            <div class="card stat-card">
+                <i class="fa-solid fa-envelope fa-2x mb-2 text-primary"></i>
+                <h6 class="fw-semibold mb-1">Mensajes Recibidos</h6>
+                <h3 class="fw-bold mb-0">{{ $totalClientes }}</h3>
             </div>
         </div>
 
         <div class="col-lg-3 col-sm-6">
             <div class="card stat-card">
-                <i class="fa-solid fa-triangle-exclamation fa-2x mb-2 text-warning"></i>
-                <h6 class="fw-semibold mb-1">Declaraciones Pendientes</h6>
-                <h3 class="fw-bold mb-0">14</h3>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-sm-6">
-            <div class="card stat-card">
-                <i class="fa-solid fa-coins fa-2x mb-2 text-info"></i>
-                <h6 class="fw-semibold mb-1">Honorarios del Mes</h6>
-                <h3 class="fw-bold mb-0">S/ 32,500</h3>
+                <i class="fa-solid fa-calendar-days fa-2x mb-2 text-info"></i>
+                <h6 class="fw-semibold mb-1">Fecha Actual</h6>
+                <h3 class="fw-bold mb-0">{{ now()->format('d/m/Y') }}</h3>
             </div>
         </div>
 
@@ -71,7 +68,7 @@
                     </h6>
 
                     <span class="text-muted small">
-                        Últimos 10 meses
+
                     </span>
 
                 </div>
@@ -88,24 +85,24 @@
 
                 <h6 class="fw-bold mb-3">
                     <i class="fa-solid fa-calendar-check me-2 text-success"></i>
-                    Estado de Obligaciones
+                    Estado de Solicitudes
                 </h6>
 
                 <ul class="list-group list-group-flush">
 
                     <li class="list-group-item d-flex justify-content-between border-0 px-0">
-                        Presentadas
-                        <span class="fw-bold text-success">72%</span>
+                        Atendidos
+                        <span class="fw-bold text-success">{{ $clientesAtendidos }}</span>
                     </li>
 
-                    <li class="list-group-item d-flex justify-content-between border-0 px-0">
+                    <!-- <li class="list-group-item d-flex justify-content-between border-0 px-0">
                         En proceso
                         <span class="fw-bold text-warning">18%</span>
-                    </li>
+                    </li> -->
 
                     <li class="list-group-item d-flex justify-content-between border-0 px-0">
                         Pendientes
-                        <span class="fw-bold text-danger">10%</span>
+                        <span class="fw-bold text-danger">{{ $clientesNoAtendidos }}</span>
                     </li>
 
                 </ul>
@@ -142,34 +139,22 @@
                 </thead>
 
                 <tbody>
-
+                    @foreach($ultimosClientes as $cliente)
                     <tr>
-                        <td>001</td>
-                        <td>Empresa ABC SAC</td>
-                        <td>Declaración IGV</td>
-                        <td>Juan Pérez</td>
-                        <td>02/07/2026</td>
-                        <td><span class="badge bg-success">Finalizado</span></td>
+                        <td>{{ $cliente->id_cliente }}</td>
+                        <td>{{ $cliente->nombre_cliente }}</td>
+                        <td>{{ $cliente->empresa_cliente }}</td>
+                        <td>{{ $cliente->correo_cliente }}</td>
+                        <td>{{ $cliente->created_at->format('d/m/Y') }}</td>
+                        <td>
+                            @if($cliente->estado_cliente)
+                                <span class="badge bg-success">Atendido</span>
+                            @else
+                                <span class="badge bg-warning text-dark">Pendiente</span>
+                            @endif
+                        </td>
                     </tr>
-
-                    <tr>
-                        <td>002</td>
-                        <td>Importadora Perú</td>
-                        <td>Auditoría Financiera</td>
-                        <td>María Torres</td>
-                        <td>03/07/2026</td>
-                        <td><span class="badge bg-warning text-dark">En Proceso</span></td>
-                    </tr>
-
-                    <tr>
-                        <td>003</td>
-                        <td>Comercial SAC</td>
-                        <td>Consultoría Tributaria</td>
-                        <td>Carlos Díaz</td>
-                        <td>03/07/2026</td>
-                        <td><span class="badge bg-primary">Programado</span></td>
-                    </tr>
-
+                    @endforeach
                 </tbody>
 
             </table>

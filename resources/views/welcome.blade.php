@@ -5,23 +5,15 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Auditores & Consultores</title>
-    <!-- Bootstrap -->
+    <title>BERAKHAH S.A.C</title>
+    <link rel="icon" type="image/png" href="{{ asset('assets/images/b.png') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-
-    <!-- Swiper -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-
-    <!-- AOS -->
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
-
-    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link rel="stylesheet" href="{{ asset('assets/css/Site.public.css') }}">
 
@@ -35,7 +27,7 @@
     <div class="container">
         <a class="navbar-brand logo" href="#">
             <span class="logo-icon">
-                <img src="{{ asset('assets/images/logoBerak.png') }}" alt="Logo" class="misma-clase">
+                <img src="{{ asset('assets/images/LogoBerak-sin.png') }}" alt="Logo" class="misma-clase">
             </span>
         </a>
 
@@ -78,9 +70,9 @@
     <!-- SLIDER DE FONDO -->
     <div class="hero-slider">
         <img src="{{ asset('assets/images/im.jpg') }}" class="hero-slide active" alt="Auditoría">
-        <img src="{{ asset('assets/images/im1.1.jpg') }}" class="hero-slide" alt="Contabilidad">
-        <img src="{{ asset('assets/images/im.1.2jpg') }}" class="hero-slide" alt="Consultoría">
-        <img src="{{ asset('assets/images/banner4.jpg') }}" class="hero-slide" alt="">
+        <img src="{{ asset('assets/images/PortadaInventario.jpg') }}" class="hero-slide" alt="Contabilidad">
+        <img src="{{ asset('assets/images/im1.2.jpg') }}" class="hero-slide" alt="Consultoría">
+        <img src="{{ asset('assets/images/ban4.jpg') }}" class="hero-slide" alt="">
     </div>
 
     <!-- OVERLAY OSCURO -->
@@ -237,7 +229,7 @@
             <!-- Servicio 1 -->
            <div class="col-md-3 reveal-up">
                 <div class="service-card">
-                    <img src="{{ asset('assets/images/im2.jpg') }}" alt="Auditoría">
+                    <img src="{{ asset('assets/images/o.inv.jpg') }}" alt="Auditoría">
 
                     <div class="service-overlay">
                         <div class="service-content">
@@ -251,7 +243,7 @@
             <!-- Servicio 2 -->
             <div class="col-md-3 reveal-up">
                 <div class="service-card">
-                    <img src="{{ asset('assets/images/im2.jpg') }}" alt="Auditoría">
+                    <img src="{{ asset('assets/images/o.tasa.jpg') }}" alt="Auditoría">
 
                     <div class="service-overlay">
                         <div class="service-content">
@@ -265,7 +257,7 @@
             <!-- Servicio 3 -->
              <div class="col-md-3 reveal-up">
                 <div class="service-card">
-                    <img src="{{ asset('assets/images/im2.jpg') }}" alt="Auditoría">
+                    <img src="{{ asset('assets/images/o.outso.jpg') }}" alt="Auditoría">
 
                     <div class="service-overlay">
                         <div class="service-content">
@@ -279,7 +271,7 @@
             <!-- Servicio 4 -->
              <div class="col-md-3 reveal-up">
                 <div class="service-card">
-                    <img src="{{ asset('assets/images/im2.jpg') }}" alt="Auditoría">
+                    <img src="{{ asset('assets/images/o.conta.jpg') }}" alt="Auditoría">
 
                     <div class="service-overlay">
                         <div class="service-content">
@@ -611,35 +603,35 @@
 
             <div class="col-lg-7">
 
-                <form id="frmcontacto">
+                <form id="frmContacto">
+                    @csrf
                     <div class="row">
+
                         <div class="col-md-6 mb-3">
-                            <input type="text" class="form-control" placeholder="Nombre">
+                            <input type="text" id="nombre_cliente" name="nombre_cliente" class="form-control" placeholder="Nombre" style="text-transform: uppercase";>
                         </div>
 
                         <div class="col-md-6 mb-3">
-                            <input type="email" class="form-control" placeholder="Correo">
+                            <input type="email" id="correo_cliente" name="correo_cliente" class="form-control" placeholder="CORREO">
                         </div>
 
                         <div class="col-md-12 mb-3">
-                            <input type="text" class="form-control" placeholder="Empresa">
+                            <input type="text" id="empresa_cliente" name="empresa_cliente" class="form-control" placeholder="Empresa" style="text-transform: uppercase";>
                         </div>
 
                         <div class="col-md-12 mb-3">
-                            <textarea rows="6" class="form-control" placeholder="Mensaje"></textarea>
+                            <textarea id="mensaje_cliente" name="mensaje_cliente" rows="6" class="form-control" placeholder="Mensaje" style="text-transform: uppercase;"></textarea>
                         </div>
 
                         <div class="col-md-12">
-
-                             <button type="submit" class="btn-contacto">
-                                <span>Enviar Mensaje</span>
-                                <i class="bi bi-arrow-right"></i>
+                            <button type="button"
+                                    class="btn-contacto"
+                                    onclick="GuardarContacto()">
+                                Enviar Mensaje
                             </button>
-
                         </div>
 
                     </div>
-
                 </form>
 
             </div>
@@ -658,9 +650,7 @@
         <div class="row gy-5">
             <div class="col-lg-4">
                 <h3>BERAKHAH S.A.C</h3>
-                <p>
-                    CALLE MADRID 171 - LA PERLA
-                </p>
+                <p>CALLE MADRID 171 - LA PERLA</p>
             </div>
 
             <div class="col-lg-2">
@@ -721,7 +711,10 @@
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="{{ asset('assets/js/Generic/Generic.js') }}"></script>
 <script src="{{ asset('assets/js/Publica/Scrips.js') }}"></script>
+
 
 </body>
 

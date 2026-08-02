@@ -12,7 +12,7 @@ class CLiente extends Model
         'nombre_cliente',
         'correo_cliente',
         'empresa_cliente',
-        'estado'
+        'estado_cliente'
     ];
 }
 

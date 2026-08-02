@@ -49,7 +49,7 @@ $(document).ready(function () {
             { data: "empresa_cliente" },
 
             {
-                data: "estado",
+                data: "estado_cliente",
                 render: d => d
                     ? '<span class="badge bg-success">Atendido</span>'
                     : '<span class="badge bg-danger">Pendiente</span>',

@@ -6,15 +6,16 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\ClienteController;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ClientMail;
+use App\Http\Controllers\DashboardController;
 
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -31,13 +32,13 @@ Route::post('usuarios', [UsuarioController::class, 'guardarUsuario'])->name('usu
 Route::get('usuarios/{id}/obtener', [UsuarioController::class, 'obtenerUsuario'])->whereNumber('id');
 
 //clientes
+// Panel administrativo
 Route::get('clientes', [ClienteController::class, 'index'])->name('clientes.index');
 Route::get('clientes/listar', [ClienteController::class, 'listar'])->name('clientes.listar');
 Route::post('clientes', [ClienteController::class, 'guardarCliente'])->name('clientes.guardar');
 Route::get('clientes/{id}/obtener', [ClienteController::class, 'obtenerCliente'])->whereNumber('id');
 
-
 //mensajes
-Route::post('clientes', [ClienteController::class, 'guardarClienteForm'])->name('clientes.guardar');
+Route::post('contacto', [ClienteController::class, 'guardarClienteForm'])->middleware('throttle:5,1')->name('clientes.guardar');
 
 

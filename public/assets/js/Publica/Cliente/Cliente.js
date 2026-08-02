@@ -1,10 +1,11 @@
 
 
-function GuardarCliente() {
+//interno
+function GuardarContacto() {
 
-    if (!ValidarCamposCliente()) return;
+    if (!ValidarCamposContacto()) return;
 
-    let frm = new FormData(frmCliente);
+    let frm = new FormData(frmContacto);
     let token = document
         .querySelector('meta[name="csrf-token"]')
         .getAttribute('content');
@@ -14,9 +15,9 @@ function GuardarCliente() {
         "¿Desea enviar el mensaje?",
         function () {
 
-            $("#progress").fadeIn(500).prop("hidden", false);
+            //$("#progress").fadeIn(500).prop("hidden", false);
 
-            fetch("/clientes", {
+            fetch("/contacto", {
                 method: "POST",
                 body: frm,
                 headers: {
@@ -26,7 +27,7 @@ function GuardarCliente() {
             })
 
             .then(response => {
-                $("#progress").fadeOut(500);
+                //$("#progress").fadeOut(500);
                 if (!response.ok) {
                     return response.json().then(err => {
                         throw err;
@@ -36,9 +37,9 @@ function GuardarCliente() {
             })
 
             .then(data => {
-
+            console.log(data);
                 if (data.success) {
-                    frmCliente.reset();
+                    frmContacto.reset();
                     MessageSuccess(data.message);
                 } else {
                     MessageError(data.message);
@@ -60,25 +61,38 @@ function GuardarCliente() {
 }
 
 
-function ValidarCamposUsuario() {
+function ValidarCamposContacto() {
 
-    let nombre_cliente = getN("nombre_cliente");
-    let correo_cliente = getN("correo_cliente");
-    let empresa_cliente = getN("empresa_cliente");
-    let estado = getN("estado");
+    let nombre = getN("nombre_cliente").trim();
+    let correo = getN("correo_cliente").trim();
+    let empresa = getN("empresa_cliente").trim();
+    let mensaje = getN("mensaje_cliente").trim();
 
-    if (!nombre_cliente) {
-        MessageError("Ingrese su Nombre y Apellido.");
+    if (nombre == "") {
+        MessageError("Ingrese su nombre.");
         return false;
     }
 
-    if (!correo_cliente) {
-        MessageError("Ingrese su Correo.");
+    if (correo == "") {
+        MessageError("Ingrese su correo.");
         return false;
     }
 
-    if (!empresa_cliente) {
-        MessageError("Ingrese su Empresa.");
+    const regexCorreo =
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!regexCorreo.test(correo)) {
+        MessageError("Ingrese un correo válido.");
+        return false;
+    }
+
+    if (empresa == "") {
+        MessageError("Ingrese su empresa.");
+        return false;
+    }
+
+    if (mensaje.length > 2000) {
+        MessageError("El mensaje supera los 2000 caracteres.");
         return false;
     }
 

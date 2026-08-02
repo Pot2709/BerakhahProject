@@ -26,7 +26,7 @@ function LimpiarCliente() {
     document.querySelector('[name="nombre_cliente"]').value = "";
     document.querySelector('[name="correo_cliente"]').value = "";
     document.querySelector('[name="empresa_cliente"]').value = "";
-    document.getElementById("cboEstado").value = "";
+    document.getElementById("cboEstadoCliente").value = "";
 }
 
 function GuardarCliente(){
@@ -39,7 +39,7 @@ function GuardarCliente(){
     MessageConfirmation(undefined, '¿Desea guardar el Cliente?', function(){
         $('#progress').fadeIn(500).prop('hidden', false);
 
-        fetch('/clientes',{
+        fetch('clientes',{
             method: 'POST',
             body: frm,
             headers: {
@@ -76,7 +76,7 @@ function GuardarCliente(){
 function EditarCliente(codCliente){
     document.getElementById('mdlClienteLabel').innerHTML='Editar Cliente';
 
-    fetch(`/clientes/${codCliente}/obtener`)
+    fetch(`clientes/${codCliente}/obtener`)
         .then(res => res.json())
         .then(data => {
             document.querySelector('[name="id_cliente"]').value = data.id_cliente;
@@ -93,18 +93,14 @@ function EditarCliente(codCliente){
 
 
 
-
-
-
-
 function ValidarCamposCliente() {
-    let id_cliete = getN("id_cliente");
-    let nombre_cliete = getN("nombre_cliete");
+
+    let nombre_cliente = getN("nombre_cliente");
     let correo_cliente = getN("correo_cliente");
     let empresa_cliente = getN("empresa_cliente");
     let estado_cliente = getN("estado_cliente");
 
-    if (!nombre_cliete) {
+    if (!nombre_cliente) {
         MessageError("Ingrese el Nombre.");
         return false;
     }
