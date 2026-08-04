@@ -25,7 +25,7 @@
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg fixed-top custom-navbar">
     <div class="container">
-        <a class="navbar-brand logo" href="#">
+        <a class="navbar-brand logo" href="{{ url('/') }}">
             <span class="logo-icon">
                 <img src="{{ asset('assets/images/LogoBerak-sin.png') }}" alt="Logo" class="misma-clase">
             </span>
@@ -161,7 +161,7 @@
                     <!-- Tarjeta 1 -->
                     <div class="floating-card card-one">
                         <i class="bi bi-graph-up-arrow"></i>
-                        <h5>+500</h5>
+                        <h5>+100</h5>
                         <span>Empresas asesoradas</span>
                     </div>
 
@@ -358,7 +358,7 @@
 
        <div class="text-center mb-5 team-header">
 
-            <span class="section-tag team-tag">
+            <span class="section-tag team-tag" style="font-weight: 600;letter-spacing: 2px;font-size: 0.9rem;">
                 NUESTRO EQUIPO
             </span>
 
@@ -431,7 +431,7 @@
 <section class="services-section py-5" id="servicios" mt-4>
     <div class="container">
         <div class="text-center mb-5">
-            <span class="section-tag nuestros">NUESTROS SERVICIOS</span>
+            <span class="section-tag nuestros" style="font-weight: 600;letter-spacing: 2px;font-size: 0.9rem;">NUESTROS SERVICIOS</span>
             <h2 class="section-title" style="font-weight: 700;">SOLUCIONES EMPRESARIALES PARA  CADA NECESIDAD</h2>
             <div class="line"></div>
 

@@ -7,6 +7,9 @@ use App\Models\Cliente;
 use App\Mail\ClientMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Bus;
+use Maatwebsite\Excel\Facades\Excel;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class ClienteController extends Controller
 {
@@ -133,4 +136,44 @@ class ClienteController extends Controller
 
         }
     }
+
+    public function exportarExcel(){
+        $clientes = Cliente::all();
+
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+        // Encabezados
+        $sheet->setCellValue('A1', 'Id');
+        $sheet->setCellValue('B1', 'Nombre Cliente');
+        $sheet->setCellValue('C1', 'Correo Cliente');
+        $sheet->setCellValue('D1', 'Empresa Cliente');
+        $sheet->setCellValue('E1', 'Estado');
+
+        $row = 2;
+
+        foreach ($clientes as $cliente) {
+            $sheet->setCellValue('A' . $row, $cliente->id_cliente);
+            $sheet->setCellValue('B' . $row, $cliente->nombre_cliente);
+            $sheet->setCellValue('C' . $row, $cliente->correo_cliente);
+            $sheet->setCellValue('D' . $row, $cliente->empresa_cliente);
+            $sheet->setCellValue(
+                'E' . $row,
+                $cliente->estado_cliente ? 'Activo' : 'Inactivo'
+            );
+
+            $row++;
+        }
+
+        $writer = new Xlsx($spreadsheet);
+
+        return response()->streamDownload(function () use ($writer) {
+            $writer->save('php://output');
+        }, 'clientes.xlsx', [
+            'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        ]);
+    }
+
+
+
 }

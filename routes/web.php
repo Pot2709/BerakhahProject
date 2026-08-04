@@ -36,6 +36,7 @@ Route::get('usuarios/{id}/obtener', [UsuarioController::class, 'obtenerUsuario']
 Route::get('clientes', [ClienteController::class, 'index'])->name('clientes.index');
 Route::get('clientes/listar', [ClienteController::class, 'listar'])->name('clientes.listar');
 Route::post('clientes', [ClienteController::class, 'guardarCliente'])->name('clientes.guardar');
+Route::get('clientes/exportar', [ClienteController::class, 'exportarExcel'])->name('clientes.exportar');
 Route::get('clientes/{id}/obtener', [ClienteController::class, 'obtenerCliente'])->whereNumber('id');
 
 //mensajes

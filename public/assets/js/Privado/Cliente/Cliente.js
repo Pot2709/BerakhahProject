@@ -122,3 +122,39 @@ function ValidarCamposCliente() {
 
     return true;
 }
+
+function DescargarExcelCliente(){
+    MessageConfirmation(
+        null,
+        '¿Desea descargar el excel de clientes?',
+        function(){
+            Generando();
+            fetch('clientes/exportar')
+                .then(response=>{
+                    if(!response.ok){
+                        throw new Error('Error al generar el archivo');
+                    }
+                    return response.blob();
+                })
+                .then(blob => {
+                    //link temporal para descarga
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `clientes${new Date().toISOString().slice(0, 10)}.xlsx`;
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+                    window.URL.revokeObjectURL(url);
+
+                    Swal.close();
+                    MessageSuccess('Archivo descargando correctamente');
+                })
+                .catch(error => {
+                    Swal.close();
+                    console.error(error);
+                    MessageError('No se puedo cargar el archivo');
+                })
+        }
+    );
+}
