@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Bus;
 use Maatwebsite\Excel\Facades\Excel;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use Throwable;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\ValidationException;
 
 class ClienteController extends Controller
 {
@@ -75,8 +78,6 @@ class ClienteController extends Controller
     }
 
 
-
-
      public function obtenerCliente($id){
         $cliente = Cliente::find($id);
         if(!$cliente){
@@ -91,49 +92,158 @@ class ClienteController extends Controller
         ]);
     }
 
-
-
-    // controlador para el fornulario del welcome
-    public function guardarClienteForm(Request $request){
+    public function eliminarCliente($id){
         try {
+            $cliente = Cliente::find($id);
 
-            $request->validate([
-                'nombre_cliente'  => 'required|string|max:100',
-                'correo_cliente'  => 'required|email|max:100',
-                'empresa_cliente' => 'required|string|max:150',
-                'mensaje_cliente' => 'string|max:2000',
-            ]);
+            if (!$cliente) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Cliente no encontrado'
+                ], 404);
+            }
 
-            // guardar lo necesario
-           Cliente::create([
-            'nombre_cliente'  => mb_strtoupper($request->nombre_cliente, 'UTF-8'),
-            'correo_cliente'  => strtolower($request->correo_cliente),
-            'empresa_cliente' => mb_strtoupper($request->empresa_cliente, 'UTF-8'),
-            'estado_cliente'  => false
-        ]);
-
-            // envia el correo
-           Mail::to('pruebas@berakhah.pe')
-            ->queue(new ClientMail([
-                'nombre_cliente'  => mb_strtoupper($request->nombre_cliente, 'UTF-8'),
-
-                'correo_cliente'  => strtolower($request->correo_cliente),
-                'empresa_cliente' => mb_strtoupper($request->empresa_cliente, 'UTF-8'),
-                'mensaje_cliente' => mb_strtoupper($request->mensaje_cliente, 'UTF-8'),
-            ]));
+            $cliente->delete();
 
             return response()->json([
                 'success' => true,
-                'message' => 'Mensaje enviado correctamente.'
+                'message' => 'Cliente eliminado correctamente'
             ]);
 
         } catch (\Exception $e) {
 
             return response()->json([
                 'success' => false,
-                'message' => $e->getMessage()
+                'message' => 'Error al eliminar el cliente'
             ], 500);
+        }
+    }
 
+
+    // controlador para el fornulario del welcome
+    // public function guardarClienteForm(Request $request){
+    //     try {
+
+    //         $request->validate([
+    //             'nombre_cliente'  => 'required|string|max:100',
+    //             'correo_cliente'  => 'required|email|max:100',
+    //             'empresa_cliente' => 'required|string|max:150',
+    //             'mensaje_cliente' => 'string|max:2000',
+    //         ]);
+
+    //         // guardar lo necesario
+    //        Cliente::create([
+    //         'nombre_cliente'  => mb_strtoupper($request->nombre_cliente, 'UTF-8'),
+    //         'correo_cliente'  => strtolower($request->correo_cliente),
+    //         'empresa_cliente' => mb_strtoupper($request->empresa_cliente, 'UTF-8'),
+    //         'estado_cliente'  => false
+    //     ]);
+
+    //         // envia el correo
+    //        Mail::to('contacto@berakhah.pe')
+    //         ->send(new ClientMail([
+    //             'nombre_cliente'  => mb_strtoupper($request->nombre_cliente, 'UTF-8'),
+
+    //             'correo_cliente'  => strtolower($request->correo_cliente),
+    //             'empresa_cliente' => mb_strtoupper($request->empresa_cliente, 'UTF-8'),
+    //             'mensaje_cliente' => mb_strtoupper($request->mensaje_cliente, 'UTF-8'),
+    //         ]));
+
+    //         return response()->json([
+    //             'success' => true,
+    //             'message' => 'Mensaje enviado correctamente.'
+    //         ]);
+
+    //     } catch (\Exception $e) {
+
+    //         return response()->json([
+    //             'success' => false,
+    //             'message' => $e->getMessage()
+    //         ], 500);
+
+    //     }
+    // }
+
+    public function guardarClienteForm(Request $request){
+        try {
+            $datos = $request->validate([
+                'nombre_cliente' => [
+                    'required',
+                    'string',
+                    'max:100',
+                    'not_regex:/<\s*\/?\s*[a-z][^>]*>/i',
+                ],
+
+                'correo_cliente' => [
+                    'required',
+                    'string',
+                    'email:rfc',
+                    'max:100',
+                ],
+
+                'empresa_cliente' => [
+                    'required',
+                    'string',
+                    'max:150',
+                    'not_regex:/<\s*\/?\s*[a-z][^>]*>/i',
+                ],
+
+                'mensaje_cliente' => [
+                    'required',
+                    'string',
+                    'max:2000',
+                    'not_regex:/<\s*\/?\s*[a-z][^>]*>/i',
+                ],
+            ], [
+                'nombre_cliente.not_regex' =>
+                    'El nombre no debe contener etiquetas HTML.',
+
+                'empresa_cliente.not_regex' =>
+                    'La empresa no debe contener etiquetas HTML.',
+
+                'mensaje_cliente.not_regex' =>
+                    'El mensaje no debe contener etiquetas HTML.',
+            ]);
+
+            $nombre = mb_strtoupper(trim($datos['nombre_cliente']), 'UTF-8');
+            $correo = strtolower(trim($datos['correo_cliente']));
+            $empresa = mb_strtoupper(trim($datos['empresa_cliente']), 'UTF-8');
+            $mensaje = mb_strtoupper(trim($datos['mensaje_cliente']), 'UTF-8');
+
+            Cliente::create([
+                'nombre_cliente'  => $nombre,
+                'correo_cliente'  => $correo,
+                'empresa_cliente' => $empresa,
+                'estado_cliente'  => false,
+            ]);
+
+            Mail::to('contacto@berakhah.pe')->send(
+                new ClientMail([
+                    'nombre_cliente'  => $nombre,
+                    'correo_cliente'  => $correo,
+                    'empresa_cliente' => $empresa,
+                    'mensaje_cliente' => $mensaje,
+                ])
+            );
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Mensaje enviado correctamente.',
+            ]);
+
+        } catch (ValidationException $e) {
+            // Laravel gestiona la respuesta de validación automáticamente.
+            throw $e;
+
+        } catch (Throwable $e) {
+            Log::error('Error al procesar el formulario de contacto.', [
+                'exception' => $e,
+            ]);
+
+            return response()->json([
+                'success' => false,
+                'message' => 'No fue posible enviar el mensaje. Inténtalo más tarde.',
+            ], 500);
         }
     }
 
@@ -173,6 +283,10 @@ class ClienteController extends Controller
             'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
         ]);
     }
+
+
+
+
 
 
 

@@ -33,7 +33,6 @@
                 </div>
             </div>
 
-            {{-- TABLA DE ROLES --}}
             <div class="row pt-3">
                 <div id="divRol">
                     @include('Administrador.cliente.listar')
@@ -44,7 +43,6 @@
     </div>
 </div>
 
-<!-- MODAL CLIENTE -->
 <div class="modal fade" id="mdlCliente" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="mdlClienteLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content rounded-4">

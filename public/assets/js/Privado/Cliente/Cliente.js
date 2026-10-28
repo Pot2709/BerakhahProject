@@ -92,6 +92,38 @@ function EditarCliente(codCliente){
 }
 
 
+function EliminarCliente(codCliente) {
+    MessageConfirmation(
+        "¿Desea eliminar el Cliente?",
+        "Confirmar eliminación",
+        function () {
+            fetch(`/clientes/${codCliente}`, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': document
+                        .querySelector('meta[name="csrf-token"]')
+                        .getAttribute('content'),
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(res => {
+                if (res.success) {
+                    ListarCliente();
+                    MessageSuccess("Se eliminó correctamente");
+                } else {
+                    MessageError(res.message || "Hubo un error al eliminar el Cliente");
+                }
+            })
+            .catch(error => {
+                console.error(error);
+                MessageError("Hubo un error al eliminar el Cliente");
+            });
+        }
+    );
+}
+
+
 
 function ValidarCamposCliente() {
 

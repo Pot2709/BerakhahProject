@@ -9,7 +9,6 @@ function GuardarContacto() {
     let token = document
         .querySelector('meta[name="csrf-token"]')
         .getAttribute('content');
-        frm.append('_token', token);
         MessageConfirmation(
         undefined,
         "¿Desea enviar el mensaje?",
@@ -78,8 +77,7 @@ function ValidarCamposContacto() {
         return false;
     }
 
-    const regexCorreo =
-        /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!regexCorreo.test(correo)) {
         MessageError("Ingrese un correo válido.");

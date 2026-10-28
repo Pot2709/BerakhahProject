@@ -2,11 +2,9 @@
 <html lang="es">
 
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <title>BERAKHAH S.A.C</title>
     <link rel="icon" type="image/png" href="{{ asset('assets/images/b.png') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -16,7 +14,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link rel="stylesheet" href="{{ asset('assets/css/Site.public.css') }}">
-
 </head>
 
 <body>
@@ -27,7 +24,7 @@
     <div class="container">
         <a class="navbar-brand logo" href="{{ url('/') }}">
             <span class="logo-icon">
-                <img src="{{ asset('assets/images/LogoBerak-sin.png') }}" alt="Logo" class="misma-clase">
+                <img src="{{ asset('assets/images/LogoBerak-sin.png') }}" alt="" class="misma-clase">
             </span>
         </a>
 
@@ -64,10 +61,10 @@
 </nav>
 
 
-<!-- HERO -->
+<!-- hero -->
 <section class="hero animating" id="inicio">
 
-    <!-- SLIDER DE FONDO -->
+    <!-- slider -->
     <div class="hero-slider">
         <img src="{{ asset('assets/images/im.jpg') }}" class="hero-slide active" alt="Auditoría">
         <img src="{{ asset('assets/images/PortadaInventario.jpg') }}" class="hero-slide" alt="Contabilidad">
@@ -75,10 +72,9 @@
         <img src="{{ asset('assets/images/ban4.jpg') }}" class="hero-slide" alt="">
     </div>
 
-    <!-- OVERLAY OSCURO -->
+    <!-- overlay -->
     <div class="hero-overlay"></div>
 
-    <!-- CÍRCULOS DECORATIVOS -->
     <div class="hero-circle hero-circle-1"></div>
     <div class="hero-circle hero-circle-2"></div>
     <div class="hero-circle hero-circle-3"></div>
@@ -139,7 +135,6 @@
 
 </section>
 
-<!-- NOSOTROS -->
 <section class="about-section py-5" id="nosotros" mb-4 mt-4>
 
     <div class="container">
@@ -151,28 +146,24 @@
 
         <div class="row align-items-center gy-5">
 
-            <!-- Imagen -->
             <div class="col-lg-6 about-left">
 
                 <div class="about-image position-relative">
 
                     <img src="{{ asset('assets/images/im3.jpg') }}" class="img-fluid rounded-5 shadow-lg w-100" alt="Nosotros">
 
-                    <!-- Tarjeta 1 -->
                     <div class="floating-card card-one">
                         <i class="bi bi-graph-up-arrow"></i>
                         <h5>+100</h5>
                         <span>Empresas asesoradas</span>
                     </div>
 
-                    <!-- Tarjeta 2 -->
                     <div class="floating-card card-two">
                         <i class="bi bi-shield-check"></i>
                         <h5>100%</h5>
                         <span>Confidencialidad</span>
                     </div>
 
-                    <!-- Tarjeta 3 -->
                     <div class="floating-card card-three">
                         <i class="bi bi-award"></i>
                         <h5>15+</h5>
@@ -183,7 +174,6 @@
 
             </div>
 
-            <!-- Texto -->
             <div class="col-lg-6 about-right">
 
                 <h2 class="section-title">
@@ -211,7 +201,6 @@
 
 </section>
 
-<!-- ofrecemos -->
 <section class="companies">
 
     <div class="container">
@@ -226,7 +215,6 @@
 
         <div class="row mt-5 g-4">
 
-            <!-- Servicio 1 -->
            <div class="col-md-3 reveal-up">
                 <div class="service-card">
                     <img src="{{ asset('assets/images/o.inv.jpg') }}" alt="Auditoría">
@@ -240,7 +228,6 @@
                 </div>
             </div>
 
-            <!-- Servicio 2 -->
             <div class="col-md-3 reveal-up">
                 <div class="service-card">
                     <img src="{{ asset('assets/images/o.tasa.jpg') }}" alt="Auditoría">
@@ -254,7 +241,6 @@
                 </div>
             </div>
 
-            <!-- Servicio 3 -->
              <div class="col-md-3 reveal-up">
                 <div class="service-card">
                     <img src="{{ asset('assets/images/o.outso.jpg') }}" alt="Auditoría">
@@ -268,7 +254,6 @@
                 </div>
             </div>
 
-            <!-- Servicio 4 -->
              <div class="col-md-3 reveal-up">
                 <div class="service-card">
                     <img src="{{ asset('assets/images/o.conta.jpg') }}" alt="Auditoría">
@@ -290,7 +275,6 @@
 
 
 
-<!-- MISIÓN -->
 <section class="mission-section">
     <div class="container">
 
@@ -351,52 +335,23 @@
     </div>
 </section>
 
-<!-- NUESTRO EQUIPO -->
 <section class="team-section" id="equipo">
-
     <div class="container">
-
        <div class="text-center mb-5 team-header">
-
             <span class="section-tag team-tag" style="font-weight: 600;letter-spacing: 2px;font-size: 0.9rem;">
                 NUESTRO EQUIPO
             </span>
-
-            <h1 class="section-title" style="font-weight: 700;">
-                COMPROMETIDOS CON EL ÉXITO EMPRESARIAL.
-            </h1>
+            <h1 class="section-title" style="font-weight: 700;">COMPROMETIDOS CON EL ÉXITO EMPRESARIAL.</h1>
             <div class="line"></div>
-
-
         </div>
 
         <div class="row g-4">
-
-            <!-- Integrante 1 -->
-            <div class="col-lg-4 col-md-6 team-item">
-
-                <div class="team-card">
-                    <img src="{{ asset('assets/images/consultor.jpg') }}" alt="Juan Pérez">
-                    <div class="team-overlay">
-                        <h4>Juan Pérez</h4>
-                        <span>Auditor Senior</span>
-                        <div class="team-social">
-                            <a href="#"><i class="bi bi-linkedin"></i></a>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <!-- Integrante 2 -->
             <div class="col-lg-4 col-md-6 team-item">
                 <div class="team-card">
-                    <img src="{{ asset('assets/images/consultor.jpg') }}" alt="María Torres">
+                    <img src="{{ asset('assets/images/ne.1.jpeg') }}" alt="">
                     <div class="team-overlay">
-                        <h4>María Torres</h4>
-                        <span>Consultora Financiera</span>
+                        <h4>Miguel Salinas Patron</h4>
+                        <span>Contador Público</span>
                         <div class="team-social">
                             <a href="#"><i class="bi bi-linkedin"></i></a>
                         </div>
@@ -404,43 +359,45 @@
                 </div>
             </div>
 
-            <!-- Integrante 3 -->
             <div class="col-lg-4 col-md-6 team-item">
                 <div class="team-card">
-                    <img src="{{ asset('assets/images/consultor.jpg') }}" alt="Andrea López">
+                    <img src="{{ asset('assets/images/ne.2.jpeg') }}" alt="">
                     <div class="team-overlay">
-                        <h4>Andrea López</h4>
-                        <span>Asesora Tributaria</span>
+                        <h4>Luis Sanches Verastegui</h4>
+                        <span>Ingeniero Idustrial</span>
                         <div class="team-social">
                             <a href="#"><i class="bi bi-linkedin"></i></a>
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
 
+            <div class="col-lg-4 col-md-6 team-item">
+                <div class="team-card">
+                    <img src="{{ asset('assets/images/ne.3.jpeg') }}" alt="">
+                    <div class="team-overlay">
+                        <h4>John Arias Alvino</h4>
+                        <span>Consultor Comercial</span>
+                        <div class="team-social">
+                            <a href="#"><i class="bi bi-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
     </div>
-
 </section>
 
-<!-- servicios -->
 <section class="services-section py-5" id="servicios" mt-4>
     <div class="container">
         <div class="text-center mb-5">
             <span class="section-tag nuestros" style="font-weight: 600;letter-spacing: 2px;font-size: 0.9rem;">NUESTROS SERVICIOS</span>
             <h2 class="section-title" style="font-weight: 700;">SOLUCIONES EMPRESARIALES PARA  CADA NECESIDAD</h2>
             <div class="line"></div>
-
         </div>
 
         <div class="swiper servicesSwiper mt-4">
             <div class="swiper-wrapper mt-4">
-
-                <!-- Servicio 1 -->
                 <div class="swiper-slide">
                     <div class="service-card">
                         <div class="service-icon">
@@ -455,7 +412,6 @@
                     </div>
                 </div>
 
-                <!-- Servicio 2 -->
                 <div class="swiper-slide">
                     <div class="service-card">
                         <div class="service-icon">
@@ -470,7 +426,6 @@
                     </div>
                 </div>
 
-                <!-- Servicio 3 -->
                 <div class="swiper-slide">
                     <div class="service-card">
                         <div class="service-icon">
@@ -485,7 +440,6 @@
                     </div>
                 </div>
 
-                <!-- Servicio 4 -->
                 <div class="swiper-slide">
                     <div class="service-card">
                         <div class="service-icon">
@@ -501,27 +455,19 @@
                 </div>
 
             </div>
-
-            <!-- puntitos -->
             <div class="swiper-pagination"></div>
-
         </div>
-
     </div>
-
 </section>
 
 
-<!-- BENEFICIOS -->
 <section class="benefits-section" id="beneficios">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6">
-
                 <h1 class="section-title beneficios ">
                     Trabajamos para que tu empresa crezca con seguridad.
                 </h1>
-
                 <div class="benefit-item beneficios">
                     <i class="bi bi-check-circle-fill"></i>
                     <div>
@@ -529,7 +475,6 @@
                         <p>Especialistas certificados en auditoría y consultoría.</p>
                     </div>
                 </div>
-
                 <div class="benefit-item beneficios">
                     <i class="bi bi-check-circle-fill"></i>
                     <div>
@@ -537,7 +482,6 @@
                         <p>Manejo responsable y seguro de toda la información.</p>
                     </div>
                 </div>
-
                 <div class="benefit-item beneficios">
                     <i class="bi bi-check-circle-fill"></i>
                     <div>
@@ -545,7 +489,6 @@
                         <p>Soluciones adaptadas a cada tipo de empresa.</p>
                     </div>
                 </div>
-
             </div>
 
             <div class="col-lg-6">
@@ -558,7 +501,6 @@
 </section>
 
 
-<!-- llamada de accion -->
 <section class="cta-section">
     <div class="container">
         <div class="row align-items-center">
@@ -578,22 +520,14 @@
 
 </section>
 
-<!-- contacto -->
-
 <section id="contacto" class="contact-section py-5">
-
     <div class="container">
-
         <div class="row">
             <div class="col-lg-5">
                 <h2 class="section-title">
                     Conversemos sobre tu empresa
                 </h2>
-
-                <p>
-                    Escríbenos y un asesor se comunicará contigo en el menor tiempo posible.
-                </p>
-
+                <p>Escríbenos y un asesor se comunicará contigo en el menor tiempo posible.</p>
                 <div class="contact-info">
                     <p><i class="bi bi-geo-alt-fill"></i> Lima - Perú</p>
                     <p><i class="bi bi-envelope-fill"></i> contacto@berakhah.com</p>
@@ -602,7 +536,6 @@
             </div>
 
             <div class="col-lg-7">
-
                 <form id="frmContacto">
                     @csrf
                     <div class="row">
@@ -611,8 +544,8 @@
                             <input type="text" id="nombre_cliente" name="nombre_cliente" class="form-control" placeholder="Nombre" style="text-transform: uppercase";>
                         </div>
 
-                        <div class="col-md-6 mb-3">
-                            <input type="email" id="correo_cliente" name="correo_cliente" class="form-control" placeholder="CORREO">
+                       <div class="col-md-6 mb-3">
+                            <input type="email" id="correo_cliente" name="correo_cliente" class="form-control" placeholder="CORREO" style="text-transform: uppercase;">
                         </div>
 
                         <div class="col-md-12 mb-3">
@@ -624,28 +557,18 @@
                         </div>
 
                         <div class="col-md-12">
-                            <button type="button"
-                                    class="btn-contacto"
-                                    onclick="GuardarContacto()">
-                                Enviar Mensaje
-                            </button>
+                            <button type="button" class="btn-contacto" onclick="GuardarContacto()">Enviar Mensaje</button>
                         </div>
-
                     </div>
                 </form>
-
             </div>
-
         </div>
-
     </div>
 
 </section>
 
-<!-- footer -->
 
 <footer class="footer mt-3">
-
     <div class="container">
         <div class="row gy-5">
             <div class="col-lg-4">
@@ -694,15 +617,12 @@
         <hr>
 
         <div class="text-center">
-            © 2026 Consultoría Empresarial & Auditoría Berakhah S.A.C | Todos los derechos reservados.
+            © {{ date('Y') }} Consultoría Empresarial & Auditoría Berakhah S.A.C | Todos los derechos reservados.
         </div>
 
     </div>
 
 </footer>
-
-
-
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
